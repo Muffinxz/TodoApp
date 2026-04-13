@@ -15,7 +15,7 @@ app.mount("/static", StaticFiles(directory="TodoApp/static"), name="static")
 
 @app.get("/")
 def test(request:Request):
-    return RedirectResponse (url="todos/todo-page", status_code=status.HTTP_302_FOUND)
+    return RedirectResponse (url="/todos/todo-page", status_code=status.HTTP_302_FOUND)
 
 @app.get("/healthy")
 def health_check():
