@@ -1,60 +1,65 @@
-<input type="text" class="form-control" name="first_name" required>
-<input type="text" class="form-control" name="last_name" required>
-
-Ton formulaire corrigé :
-
 {% include 'layout.html' %}
 
-<div class="container">
-  <div class="card">
-    <div class="card-header">
-      Register
+<div class="auth-wrapper">
+    <div class="auth-card auth-card-wide">
+        <div class="auth-header">
+            <h2>Create your account</h2>
+            <p>Join TodoApp and start organizing your tasks beautifully</p>
+        </div>
+
+        <div class="auth-body">
+            <form id="registerForm" method="post" action="/auth/">
+                <div class="form-row-custom">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="form-row-custom">
+                    <div class="form-group">
+                        <label>First name</label>
+                        <input type="text" class="form-control" name="first_name" autocomplete="given-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last name</label>
+                        <input type="text" class="form-control" name="last_name" autocomplete="family-name" required>
+                    </div>
+                </div>
+
+                <div class="form-row-custom">
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" class="form-control" name="role" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone number</label>
+                        <input type="text" class="form-control" name="phone_number" autocomplete="tel" required>
+                    </div>
+                </div>
+
+                <div class="form-row-custom">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" autocomplete="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Verify password</label>
+                        <input type="password" class="form-control" name="password2" autocomplete="new-password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-login">Create account</button>
+            </form>
+        </div>
+
+        <div class="auth-footer">
+            <span>Already have an account?</span>
+            <a href="/auth/login-page">Login</a>
+        </div>
     </div>
-    <div class="card-body">
-      <form id="registerForm">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Username</label>
-            <input type="text" class="form-control" name="username" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>First Name</label>
-            <input type="text" class="form-control" name="first_name" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Last Name</label>
-            <input type="text" class="form-control" name="last_name" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Role</label>
-            <input type="text" class="form-control" name="role" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Phone Number</label>
-            <input type="text" class="form-control" name="phone_number" autocomplete="phone_number" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" name="password" autocomplete="new-password" required>
-        </div>
-        <div class="form-group">
-          <label>Verify Password</label>
-          <input type="password" class="form-control" name="password2" autocomplete="new-password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-      </form>
-    </div>
-    <div class="card-footer text-muted">
-      <a href="/auth/login-page">Already have an account?</a>
-    </div>
-  </div>
 </div>
