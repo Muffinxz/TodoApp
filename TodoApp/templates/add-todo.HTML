@@ -1,0 +1,72 @@
+{% include 'layout.html' %}
+
+<div class="todo-create-page">
+    <div class="todo-create-glow glow-left"></div>
+    <div class="todo-create-glow glow-right"></div>
+
+    <div class="todo-create-shell">
+        <div class="todo-create-hero">
+            <span class="todo-create-pill">New task</span>
+            <h1>Plan your next move</h1>
+            <p>
+                Add a clear title, describe what needs to be done, and set the right priority
+                so you can stay organized and focused.
+            </p>
+        </div>
+
+        <div class="todo-create-card">
+            <div class="todo-create-card-top">
+                <h2>Add Todo</h2>
+                <p>Fill out the form below to create a new task.</p>
+            </div>
+
+            <div class="todo-create-card-body">
+                <form id="todoForm">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input
+                            id="title"
+                            type="text"
+                            class="form-control todo-modern-input"
+                            name="title"
+                            placeholder="Example: Finish API assignment"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea
+                            id="description"
+                            class="form-control todo-modern-input todo-modern-textarea"
+                            rows="5"
+                            name="description"
+                            placeholder="Add a short description of the task..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select
+                            id="priority"
+                            class="form-control todo-modern-input"
+                            name="priority"
+                        >
+                            <option value="1">1 - Lowest</option>
+                            <option value="2">2 - Low</option>
+                            <option value="3">3 - Medium</option>
+                            <option value="4">4 - High</option>
+                            <option value="5">5 - Urgent</option>
+                        </select>
+                    </div>
+
+                    <div class="todo-create-actions">
+                        <button type="submit" class="btn todo-create-btn">Add new todo</button>
+                        <a href="/todos/todo-page" class="btn todo-secondary-btn">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+{% include 'layout.html' %}
+
+<div class="auth-page">
+    <div class="auth-background auth-bg-1"></div>
+    <div class="auth-background auth-bg-2"></div>
+
+    <div class="auth-card">
+        <div class="auth-left">
+            <div class="brand-badge">TodoApp</div>
+            <h1>Welcome back</h1>
+            <p class="auth-subtext">
+                Sign in to manage your tasks, stay organized, and keep your day under control.
+            </p>
+
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <span>✓</span>
+                    <p>Track your daily tasks</p>
+                </div>
+                <div class="auth-feature">
+                    <span>✓</span>
+                    <p>Stay focused and productive</p>
+                </div>
+                <div class="auth-feature">
+                    <span>✓</span>
+                    <p>Simple and clean experience</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="card glass-card border-0 shadow-lg">
+                <div class="card-header auth-card-header">
+                    <h2>Login</h2>
+                    <p>Access your account</p>
+                </div>
+
+                <div class="card-body auth-card-body">
+                    <form id="loginForm">
+                        <div class="form-group mb-4">
+                            <label>Username</label>
+                            <input
+                                type="text"
+                                class="form-control fancy-input"
+                                name="username"
+                                autocomplete="username"
+                                placeholder="Enter your username"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                class="form-control fancy-input"
+                                name="password"
+                                autocomplete="current-password"
+                                placeholder="Enter your password"
+                                required
+                            >
+                        </div>
+
+                        <button type="submit" class="btn fancy-btn w-100">Login</button>
+                    </form>
+                </div>
+
+                <div class="card-footer auth-card-footer">
+                    <span>Don’t have an account?</span>
+                    <a href="/auth/register-page">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

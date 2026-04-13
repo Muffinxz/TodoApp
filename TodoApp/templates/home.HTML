@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', path='css/base.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp</title>
+</head>
+<body>
+    <div class="background-glow glow-1"></div>
+    <div class="background-glow glow-2"></div>
+
+    <header class="navbar">
+        <div class="logo">TodoApp</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/auth/login-page">Login</a>
+            <a href="/auth/register-page" class="nav-btn">Register</a>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <section class="hero-content">
+            <p class="tagline">Organize smarter. Work faster.</p>
+            <h1>Welcome to my personal project</h1>
+            <p class="description">
+                A modern task management app built with FastAPI, templates, and clean UI design.
+                Keep track of your goals, manage your time, and stay productive with style.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/auth/register-page" class="btn btn-primary">Get Started</a>
+                <a href="/auth/login-page" class="btn btn-secondary">Login</a>
+            </div>
+        </section>
+
+        <section class="hero-card">
+            <div class="card">
+                <h2>Your productivity hub</h2>
+                <p>Plan tasks, stay focused, and build better habits one day at a time.</p>
+
+                <div class="features">
+                    <div class="feature-box">
+                        <span>✓</span>
+                        <p>Simple task tracking</p>
+                    </div>
+                    <div class="feature-box">
+                        <span>✓</span>
+                        <p>Clean and modern design</p>
+                    </div>
+                    <div class="feature-box">
+                        <span>✓</span>
+                        <p>FastAPI powered backend</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

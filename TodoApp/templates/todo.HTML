@@ -1,0 +1,75 @@
+{% include 'layout.html' %}
+
+<div class="todo-page">
+    <div class="todo-bg todo-bg-1"></div>
+    <div class="todo-bg todo-bg-2"></div>
+
+    <div class="todo-container">
+        <div class="todo-header-box">
+            <p class="todo-badge">Your productivity space</p>
+            <h1>Your Todos</h1>
+            <p class="todo-subtitle">
+                Keep track of everything that matters and stay organized every day.
+            </p>
+        </div>
+
+        <div class="todo-card">
+            <div class="todo-card-top">
+                <div>
+                    <h2>Task List</h2>
+                    <p>Information regarding stuff that needs to be completed</p>
+                </div>
+
+                <a href="add-todo-page" class="btn add-todo-btn">+ Add new todo</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table custom-todo-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for todo in todos %}
+                        {% if todo.complete == False %}
+                        <tr class="todo-row">
+                            <td>{{ loop.index }}</td>
+                            <td class="todo-task-title">{{ todo.title }}</td>
+                            <td>
+                                <span class="status-badge pending-badge">Pending</span>
+                            </td>
+                            <td>
+                                <button onclick="window.location.href='edit-todo-page/{{todo.id}}'"
+                                        type="button"
+                                        class="btn edit-btn">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr class="todo-row completed-row">
+                            <td>{{ loop.index }}</td>
+                            <td class="todo-task-title completed-text">{{ todo.title }}</td>
+                            <td>
+                                <span class="status-badge done-badge">Completed</span>
+                            </td>
+                            <td>
+                                <button onclick="window.location.href='edit-todo-page/{{todo.id}}'"
+                                        type="button"
+                                        class="btn edit-btn">
+                                    Edit
+                                </button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
