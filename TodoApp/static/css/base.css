@@ -1,51 +1,116 @@
 :root {
   --bg: #f6f1e8;
-  --surface: #fffaf3;
-  --surface-2: #f1e7d8;
+  --bg-soft: #efe7da;
+  --surface: rgba(255, 250, 243, 0.9);
+  --surface-solid: #fffaf3;
+  --surface-dark: #2b241f;
   --text: #1f1a17;
-  --muted: #6b625b;
+  --text-soft: #6b625b;
+  --text-light: #8a7f75;
   --border: #ddd2c3;
   --accent: #b85c38;
-  --accent-2: #8f3d2e;
-  --success: #4c7a5a;
+  --accent-dark: #944626;
+  --accent-soft: #efe1d3;
+  --success: #4d7c5a;
+  --success-soft: #dcebdd;
+  --warning: #8b5e1a;
+  --warning-soft: #efe1c7;
   --danger: #b23a48;
-  --shadow: 0 12px 30px rgba(31, 26, 23, 0.08);
-  --radius-lg: 24px;
-  --radius-md: 16px;
+  --danger-dark: #962c39;
+  --shadow-sm: 0 8px 20px rgba(31, 26, 23, 0.06);
+  --shadow-md: 0 14px 36px rgba(31, 26, 23, 0.08);
+  --shadow-lg: 0 24px 60px rgba(31, 26, 23, 0.12);
   --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --max-width: 1180px;
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Inter", "Segoe UI", sans-serif;
-  background: var(--bg);
-  color: var(--text);
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background:
+    linear-gradient(rgba(246, 241, 232, 0.88), rgba(246, 241, 232, 0.92)),
+    url("/static/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  line-height: 1.55;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.container,
+.todo-shell,
+.todo-container,
+.todo-create-shell,
+.todo-edit-shell,
+.todo-form-wrapper,
+.hero,
+.navbar {
+  width: min(92%, var(--max-width));
+  margin-inline: auto;
+}
+
+/* ---------- Navbar ---------- */
+
 .custom-navbar-wrapper {
-  padding: 18px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 18px 20px;
+  backdrop-filter: blur(6px);
 }
 
 .custom-navbar {
-  max-width: 1180px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 16px 22px;
-  border-radius: 20px;
-  background: rgba(255, 250, 243, 0.88);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
+  padding: 14px 22px;
+  border-radius: 22px;
+  background: rgba(255, 250, 243, 0.82);
+  border: 1px solid rgba(221, 210, 195, 0.9);
+  box-shadow: var(--shadow-md);
 }
 
 .custom-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
   color: var(--text) !important;
-  font-weight: 800;
   font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.custom-brand:hover {
+  color: var(--text) !important;
   text-decoration: none;
 }
 
@@ -54,20 +119,24 @@ body {
   height: 10px;
   border-radius: 999px;
   background: var(--accent);
-  box-shadow: none;
 }
 
 .custom-nav-link {
-  color: var(--muted) !important;
+  color: var(--text-soft) !important;
   font-weight: 600;
+  padding: 8px 14px !important;
   border-radius: 12px;
-  padding: 9px 14px !important;
+  transition: 0.2s ease;
 }
 
-.custom-nav-link:hover,
-.active-link {
+.custom-nav-link:hover {
   color: var(--text) !important;
-  background: var(--surface-2);
+  background: var(--accent-soft);
+}
+
+.active-link {
+  background: var(--accent-soft);
+  color: var(--accent-dark) !important;
 }
 
 .custom-logout-btn {
@@ -77,75 +146,407 @@ body {
   background: var(--danger);
   color: white !important;
   font-weight: 700;
-  box-shadow: none;
+  box-shadow: var(--shadow-sm);
+  transition: 0.2s ease;
 }
 
 .custom-logout-btn:hover {
-  opacity: 0.92;
+  background: var(--danger-dark);
   transform: translateY(-1px);
 }
 
+.custom-toggler {
+  border: none;
+  box-shadow: none !important;
+}
+
+.custom-toggler .navbar-toggler-icon {
+  filter: invert(0.15);
+}
+
+/* ---------- Generic sections ---------- */
+
+.hero,
 .auth-page,
 .todo-page,
 .todo-create-page,
 .todo-edit-page,
 .todo-form-page {
-  background: var(--bg);
-  min-height: 100vh;
+  position: relative;
 }
 
+.background-glow,
 .auth-background,
 .todo-bg,
 .todo-create-glow,
 .todo-edit-glow,
-.todo-form-bg,
-.background-glow {
+.todo-form-bg {
   display: none;
 }
 
-.auth-card,
-.todo-card,
-.todo-create-card,
-.todo-edit-card,
-.todo-form-card,
-.hero-card .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  backdrop-filter: none;
-  color: var(--text);
+/* ---------- Home / Landing ---------- */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
 }
 
-.auth-left h1,
-.todo-header-box h1,
-.todo-create-hero h1,
-.todo-edit-hero h1,
-.todo-form-intro h1,
-.hero-content h1 {
+.logo {
+  font-size: 1.7rem;
+  font-weight: 800;
   color: var(--text);
   letter-spacing: -0.03em;
 }
 
-.auth-subtext,
-.todo-subtitle,
-.todo-create-hero p,
-.todo-edit-hero p,
-.todo-form-intro p,
-.description,
-.auth-header p,
-.todo-card-top p {
-  color: var(--muted);
+.navbar nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
 }
 
-.brand-badge,
-.todo-badge,
-.todo-create-pill,
-.todo-edit-pill,
-.todo-form-badge,
+.navbar a {
+  text-decoration: none;
+  color: var(--text-soft);
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.navbar a:hover {
+  color: var(--text);
+}
+
+.nav-btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero {
+  min-height: calc(100vh - 110px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 44px;
+  align-items: center;
+  padding: 32px 0 56px;
+}
+
+.hero-content {
+  animation: fadeUp 0.7s ease;
+}
+
 .tagline {
-  background: #efe1d3;
-  color: var(--accent-2);
+  display: inline-block;
+  padding: 8px 14px;
   border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.6rem, 5vw, 4.3rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+
+.description {
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  max-width: 620px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 14px;
+  padding: 14px 22px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-soft);
+}
+
+.hero-card .card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.85s ease;
+}
+
+.hero-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.hero-card p {
+  color: var(--text-soft);
+  margin-bottom: 22px;
+  line-height: 1.75;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feature-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f5ecdf;
+}
+
+.feature-box span {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* ---------- Auth pages ---------- */
+
+.auth-page,
+.auth-wrapper {
+  min-height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 20px 56px;
+}
+
+.auth-card {
+  width: min(100%, 1100px);
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth-card-wide {
+  width: min(100%, 920px);
+}
+
+.auth-left {
+  padding: 56px;
+  background:
+    linear-gradient(135deg, rgba(239, 225, 211, 0.9), rgba(246, 241, 232, 0.95));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: white;
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+  border: 1px solid var(--border);
+}
+
+.auth-left h1 {
+  font-size: clamp(2.3rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.auth-subtext {
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.auth-features {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 360px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(221, 210, 195, 0.7);
+}
+
+.auth-feature span {
+  color: var(--success);
+  font-weight: 800;
+}
+
+.auth-right {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-card,
+.todo-card,
+.todo-create-card,
+.todo-edit-card,
+.todo-form-card {
+  width: 100%;
+  background: var(--surface-solid) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 24px !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.auth-card-header,
+.todo-card-header,
+.todo-create-card-top,
+.todo-edit-card-top,
+.todo-form-card-header {
+  background: transparent !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 28px 28px 16px 28px;
+}
+
+.auth-card-header h2,
+.todo-card-header h2,
+.todo-create-card-top h2,
+.todo-edit-card-top h2,
+.todo-form-card-header h2 {
+  font-size: 1.8rem;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.auth-card-header p,
+.todo-card-header p,
+.todo-create-card-top p,
+.todo-edit-card-top p,
+.todo-form-card-header p,
+.auth-header p {
+  margin-top: 8px;
+  color: var(--text-soft);
+}
+
+.auth-card-body,
+.todo-card-body,
+.todo-create-card-body,
+.todo-edit-card-body,
+.todo-form-card-body,
+.auth-body {
+  padding: 28px;
+}
+
+.auth-header {
+  text-align: center;
+  padding: 28px 28px 12px;
+}
+
+.auth-header h2 {
+  font-size: 2rem;
+  color: var(--text);
+}
+
+.auth-body {
+  padding-top: 16px;
+}
+
+.auth-footer,
+.auth-card-footer {
+  border-top: 1px solid var(--border) !important;
+  padding: 18px 28px 24px;
+  text-align: center;
+  color: var(--text-soft);
+  background: transparent !important;
+}
+
+.auth-footer a,
+.auth-card-footer a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
+.auth-footer a:hover,
+.auth-card-footer a:hover {
+  color: var(--accent-dark);
+  text-decoration: underline;
+}
+
+/* ---------- Forms ---------- */
+
+.form-row-custom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label,
+.auth-card-body label,
+.todo-create-card label,
+.todo-edit-card label,
+.todo-form-card label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
@@ -153,11 +554,15 @@ body {
 .fancy-input,
 .todo-fancy-input,
 .todo-modern-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 15px !important;
+  border-radius: 14px !important;
+  border: 1px solid var(--border) !important;
   background: #fffdf9 !important;
   color: var(--text) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 14px !important;
-  box-shadow: none !important;
+  outline: none;
+  transition: 0.2s ease;
 }
 
 .form-control::placeholder,
@@ -175,70 +580,470 @@ body {
   box-shadow: 0 0 0 4px rgba(184, 92, 56, 0.12) !important;
 }
 
+.todo-textarea,
+.todo-modern-textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.todo-modern-input option,
+.todo-fancy-input option,
+.form-control option {
+  color: var(--text);
+  background: white;
+}
+
+.todo-check-group {
+  margin-top: 8px;
+}
+
+.todo-check-label {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0 !important;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.todo-check-input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+
+/* ---------- Buttons ---------- */
+
 .btn-login,
 .fancy-btn,
 .todo-submit-btn,
 .todo-create-btn,
-.add-todo-btn,
 .todo-add-btn,
-.edit-btn,
-.todo-edit-btn {
-  background: var(--accent) !important;
-  color: white !important;
+.add-todo-btn,
+.todo-edit-btn,
+.edit-btn {
+  width: auto;
   border: none !important;
   border-radius: 14px !important;
-  box-shadow: none !important;
-  font-weight: 700 !important;
+  padding: 13px 20px !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+  color: white !important;
+  background: var(--accent) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-login {
+  width: 100%;
 }
 
 .btn-login:hover,
 .fancy-btn:hover,
 .todo-submit-btn:hover,
 .todo-create-btn:hover,
-.add-todo-btn:hover,
 .todo-add-btn:hover,
-.edit-btn:hover,
-.todo-edit-btn:hover {
-  background: var(--accent-2) !important;
+.add-todo-btn:hover,
+.todo-edit-btn:hover,
+.edit-btn:hover {
+  background: var(--accent-dark) !important;
   transform: translateY(-1px);
 }
 
-.todo-secondary-btn,
 .todo-back-btn,
-.btn-secondary {
+.todo-secondary-btn {
+  border-radius: 14px !important;
+  padding: 13px 20px !important;
+  border: 1px solid var(--border) !important;
   background: #f3eadf !important;
   color: var(--text) !important;
-  border: 1px solid var(--border) !important;
+  font-weight: 700 !important;
+  text-decoration: none;
+}
+
+.todo-back-btn:hover,
+.todo-secondary-btn:hover {
+  background: #eadfce !important;
 }
 
 .todo-delete-btn {
+  border: none !important;
+  border-radius: 14px !important;
+  padding: 13px 20px !important;
   background: var(--danger) !important;
   color: white !important;
+  font-weight: 800 !important;
 }
 
-.todo-status-pending,
-.pending-badge {
-  background: #efe1c7;
-  color: #8a5a14;
+.todo-delete-btn:hover {
+  background: var(--danger-dark) !important;
 }
 
-.todo-status-done,
-.done-badge {
-  background: #dcebdd;
-  color: var(--success);
+/* ---------- Todo list page ---------- */
+
+.todo-page {
+  min-height: calc(100vh - 90px);
+  padding: 34px 20px 60px;
+}
+
+.todo-shell,
+.todo-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 26px auto 0;
+}
+
+.todo-hero,
+.todo-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.todo-hero {
+  margin-bottom: 26px;
+}
+
+.todo-badge,
+.todo-create-pill,
+.todo-edit-pill,
+.todo-form-badge,
+.todo-create-pill,
+.todo-edit-pill {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.todo-hero h1,
+.todo-header-box h1,
+.todo-create-hero h1,
+.todo-edit-hero h1,
+.todo-form-intro h1 {
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.todo-hero p,
+.todo-subtitle,
+.todo-create-hero p,
+.todo-edit-hero p,
+.todo-form-intro p {
+  color: var(--text-soft);
+  font-size: 1.04rem;
+  line-height: 1.75;
+  max-width: 720px;
+}
+
+.todo-card {
+  padding: 0;
+}
+
+.todo-card-top {
+  padding: 24px 26px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.todo-card-top h2 {
+  color: var(--text);
+  margin: 0;
+  font-size: 1.7rem;
+}
+
+.todo-card-top p {
+  margin-top: 7px;
+  color: var(--text-soft);
+}
+
+.todo-table-wrapper {
+  padding: 18px 18px 22px;
+}
+
+.todo-table,
+.custom-todo-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--text);
+  margin-bottom: 0 !important;
+  overflow: hidden;
+  border-radius: 18px;
 }
 
 .todo-table thead th,
 .custom-todo-table thead th {
-  color: var(--muted) !important;
+  padding: 16px;
   background: #f3eadf;
+  color: var(--text-soft) !important;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 800;
+  border-bottom: 1px solid var(--border) !important;
 }
 
-.todo-row,
-.custom-todo-table tbody tr {
+.todo-table tbody td,
+.custom-todo-table td {
+  padding: 16px;
+  vertical-align: middle;
+  border-top: 1px solid #eee2d4 !important;
+}
+
+.todo-row {
   background: transparent;
+  transition: 0.2s ease;
 }
 
 .todo-row:hover {
   background: #f8f0e6;
+}
+
+.todo-row-complete {
+  background: #f4f9f4;
+}
+
+.todo-title,
+.todo-task-title {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.todo-title-done,
+.completed-text {
+  color: var(--text-light);
+  text-decoration: line-through;
+}
+
+.todo-status,
+.status-badge {
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.todo-status-pending,
+.pending-badge {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.todo-status-done,
+.done-badge {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+/* ---------- Create / Edit / Form layout ---------- */
+
+.todo-create-page,
+.todo-edit-page,
+.todo-form-page {
+  min-height: calc(100vh - 90px);
+  padding: 36px 20px 70px;
+}
+
+.todo-create-shell,
+.todo-edit-shell,
+.todo-form-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 28px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.todo-create-hero,
+.todo-edit-hero,
+.todo-form-intro {
+  color: var(--text);
+}
+
+.todo-create-card-body,
+.todo-edit-card-body,
+.todo-form-card-body {
+  padding: 28px;
+}
+
+.todo-create-actions,
+.todo-edit-actions,
+.todo-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* ---------- Legacy utility compatibility ---------- */
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.card-header {
+  padding: 22px 24px 14px;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card-footer {
+  padding: 18px 24px 22px;
+  border-top: 1px solid var(--border);
+  background: transparent;
+}
+
+.text-muted {
+  color: var(--text-soft) !important;
+}
+
+.icon-credit {
+  text-align: center;
+  font-size: 12px;
+  margin: 20px 0 10px;
+  color: var(--text-light);
+}
+
+.icon-credit a {
+  color: var(--text-soft);
+  text-decoration: none;
+}
+
+.icon-credit a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 991px) {
+  .custom-navbar {
+    padding: 14px 18px;
+  }
+
+  .custom-nav-link {
+    margin-bottom: 8px;
+  }
+
+  .custom-logout-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero,
+  .auth-card,
+  .todo-create-shell,
+  .todo-edit-shell,
+  .todo-form-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    text-align: center;
+  }
+
+  .description,
+  .todo-create-hero p,
+  .todo-edit-hero p,
+  .todo-form-intro p,
+  .auth-subtext {
+    margin-inline: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .auth-left {
+    padding: 34px 28px 12px;
+    text-align: center;
+  }
+
+  .auth-feature {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .auth-right {
+    padding: 20px;
+  }
+
+  .todo-hero,
+  .todo-card-top {
+    align-items: start;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar-wrapper {
+    padding: 14px 14px 0;
+  }
+
+  .hero {
+    padding-top: 18px;
+  }
+
+  .form-row-custom {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .auth-card-wide,
+  .auth-card {
+    width: 100%;
+  }
+
+  .todo-page,
+  .todo-create-page,
+  .todo-edit-page,
+  .todo-form-page {
+    padding-inline: 14px;
+  }
+
+  .todo-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .todo-table,
+  .custom-todo-table {
+    min-width: 680px;
+  }
 }
