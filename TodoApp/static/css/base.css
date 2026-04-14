@@ -1833,3 +1833,18 @@ body {
     text-align: center;
   }
 }
+.icon-credit {
+  text-align: center;
+  font-size: 12px;
+  margin: 20px 0 10px;
+  opacity: 0.75;
+}
+
+.icon-credit a {
+  color: #888;
+  text-decoration: none;
+}
+
+.icon-credit a:hover {
+  text-decoration: underline;
+}
