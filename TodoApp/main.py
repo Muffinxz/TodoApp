@@ -3,7 +3,7 @@ from .models import Base
 from .database import engine
 from .routers import Auth, admin, todos, users
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
+from .config import templates
 
 app = FastAPI()
 
@@ -14,8 +14,8 @@ Base.metadata.create_all(bind=engine)
 app.mount("/static", StaticFiles(directory="TodoApp/static"), name="static")
 
 @app.get("/")
-def test(request:Request):
-    return RedirectResponse (url="/todos/todo-page", status_code=status.HTTP_302_FOUND)
+def home(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
 
 @app.get("/healthy")
 def health_check():
